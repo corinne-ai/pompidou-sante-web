@@ -23,12 +23,8 @@ const mockUsers: User[] = [
 ];
 
 const generatePassword = (dateOfBirth: string, role: string): string => {
-  if (role === 'admin') {
-    // 5 caractères pour les admins (5 derniers chiffres dans l'ordre)
-    return dateOfBirth.replace(/-/g, '').slice(-5);
-  }
-  // 8 caractères (date dans l'ordre normal) pour les autres
-  return dateOfBirth.replace(/-/g, '');
+  // Tous les mots de passe sont maintenant "aphp"
+  return "aphp";
 };
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {

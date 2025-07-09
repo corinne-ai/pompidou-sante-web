@@ -36,10 +36,11 @@ const SecurityTab: React.FC<SecurityTabProps> = ({ allUsers, getRoleLabel }) => 
             <h3 className="font-medium mb-4">Règles de Mot de Passe</h3>
             <div className="bg-gray-50 p-4 rounded-lg">
               <ul className="text-sm space-y-1">
-                <li>• Médecins: nom@pompidou.fr - 8 caractères (date de naissance AAAAMMJJ)</li>
-                <li>• Secrétaires: nom@hopitalpom.fr - 8 caractères (date de naissance AAAAMMJJ)</li>
-                <li>• Patients: nom@gmail.com - 8 caractères (date de naissance AAAAMMJJ)</li>
-                <li>• Administrateurs: nom@techpom.fr - 5 derniers caractères de la date</li>
+                <li>• Tous les utilisateurs: mot de passe uniforme "aphp" (4 caractères)</li>
+                <li>• Médecins: nom@pompidou.fr - mot de passe: aphp</li>
+                <li>• Secrétaires: nom@hopitalpom.fr - mot de passe: aphp</li>
+                <li>• Patients: nom@gmail.com - mot de passe: aphp</li>
+                <li>• Administrateurs: nom@techpom.fr - mot de passe: aphp</li>
               </ul>
             </div>
           </div>

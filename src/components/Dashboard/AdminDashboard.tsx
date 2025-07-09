@@ -20,7 +20,7 @@ const AdminDashboard: React.FC = () => {
       role: 'doctor', 
       status: 'Actif',
       lastLogin: '2024-11-09 14:30',
-      password: '19750315'
+      password: 'aphp'
     },
     { 
       id: '2', 
@@ -29,7 +29,7 @@ const AdminDashboard: React.FC = () => {
       role: 'doctor', 
       status: 'Actif',
       lastLogin: '2024-11-08 16:45',
-      password: '19800722'
+      password: 'aphp'
     },
     { 
       id: '3', 
@@ -38,7 +38,7 @@ const AdminDashboard: React.FC = () => {
       role: 'secretary', 
       status: 'Actif',
       lastLogin: '2024-11-09 08:15',
-      password: '19901108'
+      password: 'aphp'
     },
     { 
       id: '4', 
@@ -47,7 +47,7 @@ const AdminDashboard: React.FC = () => {
       role: 'patient', 
       status: 'Actif',
       lastLogin: '2024-11-07 10:20',
-      password: '19851203'
+      password: 'aphp'
     },
     { 
       id: '5', 
@@ -56,7 +56,7 @@ const AdminDashboard: React.FC = () => {
       role: 'patient', 
       status: 'Actif',
       lastLogin: '2024-11-06 19:30',
-      password: '19920518'
+      password: 'aphp'
     },
     { 
       id: '6', 
@@ -65,7 +65,7 @@ const AdminDashboard: React.FC = () => {
       role: 'admin', 
       status: 'Actif',
       lastLogin: '2024-11-09 09:00',
-      password: '70925'
+      password: 'aphp'
     },
     { 
       id: '7', 
@@ -74,7 +74,7 @@ const AdminDashboard: React.FC = () => {
       role: 'admin', 
       status: 'Actif',
       lastLogin: '2024-11-08 11:15',
-      password: '80114'
+      password: 'aphp'
     }
   ];
 
