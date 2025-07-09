@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { AuthState, User, LoginCredentials } from '../types/auth';
 
@@ -25,11 +24,11 @@ const mockUsers: User[] = [
 
 const generatePassword = (dateOfBirth: string, role: string): string => {
   if (role === 'admin') {
-    // 5 caractères pour les admins
+    // 5 caractères pour les admins (5 derniers chiffres dans l'ordre)
     return dateOfBirth.replace(/-/g, '').slice(-5);
   }
-  // 8 caractères (date à l'envers) pour les autres
-  return dateOfBirth.replace(/-/g, '').split('').reverse().join('');
+  // 8 caractères (date dans l'ordre normal) pour les autres
+  return dateOfBirth.replace(/-/g, '');
 };
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {

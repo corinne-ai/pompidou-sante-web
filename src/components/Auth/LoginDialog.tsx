@@ -111,7 +111,7 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ open, onOpenChange }) => {
             <p><strong>Patient:</strong> ulrich@gmail.com</p>
             <p><strong>Admin:</strong> joseph@techpom.fr</p>
             <p className="text-gray-600 mt-2">
-              <em>Mot de passe: Date de naissance à l'envers (8 car.) ou 5 car. pour admin</em>
+              <em>Contactez l'administrateur pour obtenir vos identifiants</em>
             </p>
           </div>
         </div>

@@ -30,7 +30,7 @@ const AdminDashboard: React.FC = () => {
       role: 'doctor', 
       status: 'Actif',
       lastLogin: '2024-11-09 14:30',
-      password: '51031975'
+      password: '19750315'
     },
     { 
       id: '2', 
@@ -39,7 +39,7 @@ const AdminDashboard: React.FC = () => {
       role: 'doctor', 
       status: 'Actif',
       lastLogin: '2024-11-08 16:45',
-      password: '22070801'
+      password: '19800722'
     },
     { 
       id: '3', 
@@ -48,7 +48,7 @@ const AdminDashboard: React.FC = () => {
       role: 'secretary', 
       status: 'Actif',
       lastLogin: '2024-11-09 08:15',
-      password: '80110990'
+      password: '19901108'
     },
     { 
       id: '4', 
@@ -57,7 +57,7 @@ const AdminDashboard: React.FC = () => {
       role: 'patient', 
       status: 'Actif',
       lastLogin: '2024-11-07 10:20',
-      password: '30211985'
+      password: '19851203'
     },
     { 
       id: '5', 
@@ -66,7 +66,7 @@ const AdminDashboard: React.FC = () => {
       role: 'patient', 
       status: 'Actif',
       lastLogin: '2024-11-06 19:30',
-      password: '81051992'
+      password: '19920518'
     },
     { 
       id: '6', 
@@ -75,7 +75,7 @@ const AdminDashboard: React.FC = () => {
       role: 'admin', 
       status: 'Actif',
       lastLogin: '2024-11-09 09:00',
-      password: '52909'
+      password: '70925'
     },
     { 
       id: '7', 
@@ -84,7 +84,7 @@ const AdminDashboard: React.FC = () => {
       role: 'admin', 
       status: 'Actif',
       lastLogin: '2024-11-08 11:15',
-      password: '41017'
+      password: '80114'
     }
   ];
 
@@ -373,10 +373,10 @@ const AdminDashboard: React.FC = () => {
                   <h3 className="font-medium mb-4">Règles de Mot de Passe</h3>
                   <div className="bg-gray-50 p-4 rounded-lg">
                     <ul className="text-sm space-y-1">
-                      <li>• Médecins: nom@pompidou.fr - 8 caractères (date naissance inversée)</li>
-                      <li>• Secrétaires: nom@hopitalpom.fr - 8 caractères (date naissance inversée)</li>
-                      <li>• Patients: nom@gmail.com - 8 caractères (date naissance inversée)</li>
-                      <li>• Administrateurs: nom@techpom.fr - 5 caractères</li>
+                      <li>• Médecins: nom@pompidou.fr - 8 caractères (date de naissance AAAAMMJJ)</li>
+                      <li>• Secrétaires: nom@hopitalpom.fr - 8 caractères (date de naissance AAAAMMJJ)</li>
+                      <li>• Patients: nom@gmail.com - 8 caractères (date de naissance AAAAMMJJ)</li>
+                      <li>• Administrateurs: nom@techpom.fr - 5 derniers caractères de la date</li>
                     </ul>
                   </div>
                 </div>
