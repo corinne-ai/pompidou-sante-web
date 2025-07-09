@@ -1,21 +1,11 @@
 
 import React, { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
-import { 
-  Shield, 
-  Users, 
-  Settings, 
-  Eye, 
-  Search,
-  User,
-  Lock,
-  Activity
-} from 'lucide-react';
+import { Shield } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
+import UserManagementTab from './components/UserManagementTab';
+import StatsTab from './components/StatsTab';
+import SecurityTab from './components/SecurityTab';
 
 const AdminDashboard: React.FC = () => {
   const { user } = useAuth();
@@ -117,12 +107,6 @@ const AdminDashboard: React.FC = () => {
     }
   };
 
-  const filteredUsers = allUsers.filter(u =>
-    u.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    u.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    u.role.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -147,257 +131,26 @@ const AdminDashboard: React.FC = () => {
         </TabsList>
 
         <TabsContent value="users" className="space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center">
-                <Users className="w-5 h-5 mr-2" />
-                Gestion des Comptes Utilisateurs
-              </CardTitle>
-              <CardDescription>
-                Consultez et gérez tous les comptes utilisateurs du système
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="mb-6">
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                  <Input
-                    placeholder="Rechercher un utilisateur..."
-                    className="pl-10"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div className="space-y-4">
-                  {filteredUsers.map((u) => (
-                    <Card key={u.id} className="cursor-pointer hover:shadow-md transition-shadow">
-                      <CardContent className="p-4">
-                        <div className="flex justify-between items-start mb-3">
-                          <div>
-                            <h3 className="font-medium text-lg">{u.name}</h3>
-                            <p className="text-sm text-gray-600">{u.email}</p>
-                          </div>
-                          <Badge variant={getRoleBadgeVariant(u.role)}>
-                            {getRoleLabel(u.role)}
-                          </Badge>
-                        </div>
-                        
-                        <div className="flex justify-between text-sm text-gray-500 mb-3">
-                          <span>Statut: {u.status}</span>
-                          <span>Dernière connexion: {u.lastLogin}</span>
-                        </div>
-
-                        <Button 
-                          size="sm" 
-                          variant="outline" 
-                          className="w-full"
-                          onClick={() => setSelectedUser(u.id)}
-                        >
-                          <Eye className="w-4 h-4 mr-1" />
-                          Voir les détails
-                        </Button>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-
-                {selectedUser && (
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center">
-                        <Lock className="w-5 h-5 mr-2" />
-                        Détails Utilisateur
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      {(() => {
-                        const selectedUserData = allUsers.find(u => u.id === selectedUser);
-                        if (!selectedUserData) return null;
-                        
-                        return (
-                          <div className="space-y-4">
-                            <div className="grid grid-cols-2 gap-4">
-                              <div>
-                                <h4 className="font-medium text-gray-700">Informations</h4>
-                                <div className="mt-2 space-y-2 text-sm">
-                                  <div className="flex justify-between">
-                                    <span className="text-gray-600">ID:</span>
-                                    <span>{selectedUserData.id}</span>
-                                  </div>
-                                  <div className="flex justify-between">
-                                    <span className="text-gray-600">Nom:</span>
-                                    <span>{selectedUserData.name}</span>
-                                  </div>
-                                  <div className="flex justify-between">
-                                    <span className="text-gray-600">Email:</span>
-                                    <span className="text-xs">{selectedUserData.email}</span>
-                                  </div>
-                                  <div className="flex justify-between">
-                                    <span className="text-gray-600">Rôle:</span>
-                                    <Badge variant={getRoleBadgeVariant(selectedUserData.role)} className="text-xs">
-                                      {getRoleLabel(selectedUserData.role)}
-                                    </Badge>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div>
-                                <h4 className="font-medium text-gray-700">Sécurité</h4>
-                                <div className="mt-2 space-y-2 text-sm">
-                                  <div className="flex justify-between">
-                                    <span className="text-gray-600">Mot de passe:</span>
-                                    <span className="font-mono bg-gray-100 px-2 py-1 rounded">
-                                      {selectedUserData.password}
-                                    </span>
-                                  </div>
-                                  <div className="flex justify-between">
-                                    <span className="text-gray-600">Statut:</span>
-                                    <Badge variant="outline">{selectedUserData.status}</Badge>
-                                  </div>
-                                  <div className="flex justify-between">
-                                    <span className="text-gray-600">Dernière connexion:</span>
-                                    <span className="text-xs">{selectedUserData.lastLogin}</span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="pt-4 border-t space-y-2">
-                              <Button size="sm" variant="outline" className="w-full">
-                                Réinitialiser mot de passe
-                              </Button>
-                              <Button size="sm" variant="outline" className="w-full">
-                                Suspendre compte
-                              </Button>
-                            </div>
-                          </div>
-                        );
-                      })()}
-                    </CardContent>
-                  </Card>
-                )}
-              </div>
-            </CardContent>
-          </Card>
+          <UserManagementTab
+            allUsers={allUsers}
+            searchTerm={searchTerm}
+            selectedUser={selectedUser}
+            onSearchChange={setSearchTerm}
+            onSelectUser={setSelectedUser}
+            getRoleBadgeVariant={getRoleBadgeVariant}
+            getRoleLabel={getRoleLabel}
+          />
         </TabsContent>
 
         <TabsContent value="stats">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Users className="w-5 h-5 mr-2" />
-                  Utilisateurs Total
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-3xl font-bold text-primary">{systemStats.totalUsers}</div>
-                <p className="text-sm text-gray-600 mt-1">
-                  {systemStats.activeUsers} actifs
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Activity className="w-5 h-5 mr-2" />
-                  Répartition par Rôle
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2">
-                  <div className="flex justify-between">
-                    <span>Médecins:</span>
-                    <span className="font-bold">{systemStats.doctors}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Patients:</span>
-                    <span className="font-bold">{systemStats.patients}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Secrétaires:</span>
-                    <span className="font-bold">{systemStats.secretaries}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Admins:</span>
-                    <span className="font-bold">{systemStats.admins}</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Settings className="w-5 h-5 mr-2" />
-                  Système
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2">
-                  <div className="flex justify-between">
-                    <span>Version:</span>
-                    <span className="font-bold">2.1.0</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Statut:</span>
-                    <Badge variant="default">Opérationnel</Badge>
-                  </div>
-                  <div className="text-sm text-gray-600 mt-2">
-                    Dernière mise à jour: 01/11/2024
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+          <StatsTab systemStats={systemStats} />
         </TabsContent>
 
         <TabsContent value="security">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center">
-                <Shield className="w-5 h-5 mr-2" />
-                Sécurité Système
-              </CardTitle>
-              <CardDescription>
-                Paramètres de sécurité et surveillance
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-6">
-                <div>
-                  <h3 className="font-medium mb-4">Règles de Mot de Passe</h3>
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <ul className="text-sm space-y-1">
-                      <li>• Médecins: nom@pompidou.fr - 8 caractères (date de naissance AAAAMMJJ)</li>
-                      <li>• Secrétaires: nom@hopitalpom.fr - 8 caractères (date de naissance AAAAMMJJ)</li>
-                      <li>• Patients: nom@gmail.com - 8 caractères (date de naissance AAAAMMJJ)</li>
-                      <li>• Administrateurs: nom@techpom.fr - 5 derniers caractères de la date</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="font-medium mb-4">Connexions Récentes</h3>
-                  <div className="space-y-2">
-                    {allUsers.slice(0, 5).map((u) => (
-                      <div key={u.id} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                        <div>
-                          <span className="font-medium">{u.name}</span>
-                          <span className="text-sm text-gray-600 ml-2">({getRoleLabel(u.role)})</span>
-                        </div>
-                        <span className="text-sm text-gray-500">{u.lastLogin}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          <SecurityTab
+            allUsers={allUsers}
+            getRoleLabel={getRoleLabel}
+          />
         </TabsContent>
       </Tabs>
     </div>
